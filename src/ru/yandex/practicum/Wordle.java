@@ -67,11 +67,19 @@ public class Wordle {
                 }
             }
         } catch (SystemException e) {
-            System.err.println("Системная ошибка работы приложения: " + e.getMessage());
-            log(logger, "Системная ошибка: " + e.getMessage());
+            String systemMessage = String.format("Системная ошибка работы приложения: %s", e.getMessage());
+            String logSystemMessage = String.format("Системная ошибка: %s", e.getMessage());
+
+            System.err.println(systemMessage);
+            log(logger, logSystemMessage);
+
         } catch (Exception e) {
-            System.err.println("Произошла непредвиденная ошибка: " + e.getMessage());
-            log(logger, "Непредвиденное исключение в main: " + e.toString());
+            String unexpectedMessage = String.format("Произошла непредвиденная ошибка: %s", e.getMessage());
+            String logUnexpectedMessage = String.format("Непредвиденное исключение в main: %s", e.toString());
+
+            System.err.println(unexpectedMessage);
+            log(logger, logUnexpectedMessage);
+
         } finally {
             if (loggerInstance != null) {
                 loggerInstance.close();
@@ -80,11 +88,14 @@ public class Wordle {
     }
 
     public static void printMainMenu() {
-        System.out.print("""
-                \n1 - Новая игра
-                2 - Обновить словарь
-                3 - Выход\n
-                Введите число соответственно пункту меню:\s""");
+        String nl = System.lineSeparator();
+        System.out.print(
+                nl + "1 - Новая игра" +
+                nl + "2 - Обновить словарь" +
+                nl + "3 - Выход" +
+                nl +
+                nl + "Введите число соответственно пункту меню: "
+        );
     }
 
     public static void newGame(WordleDictionary dictionary, int wordLength, int maxSteps, PrintWriter logger, Scanner scanner) throws GameException {

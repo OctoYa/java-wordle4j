@@ -27,7 +27,7 @@ public class WordleGame {
     private final WordleDictionary dictionary;
     private final String answer;
     private int steps = 0;
-    private final LinkedHashMap<String, String> history = new LinkedHashMap<>();
+    private final Map<String, String> history = new LinkedHashMap<>();
     private boolean isWinner = false;
 
     public WordleGame(PrintWriter logger, WordleDictionary dictionary) {
